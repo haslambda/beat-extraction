@@ -79,7 +79,7 @@ with contextlib.closing(wave.open(fname, 'rb')) as spf:
 
     right_shifted = np.delete(np.insert(processed, 0, 0), -1)
     diff = right_shifted - processed
-    beats = np.where(diff >= thresold)[0] / diff.size * duration * 1000
+    beats = np.where(diff >= thresold)[0] / diff.size * duration
     frame_drop = 0
 
     print(dumps(beats.tolist()))
