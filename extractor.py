@@ -5,8 +5,7 @@ import wave
 import math
 import contextlib
 import numpy as np
-import matplotlib.pyplot as plt
-import pygame
+from json import dumps
 from sys import argv
 
 fname = argv[1]
@@ -83,16 +82,4 @@ with contextlib.closing(wave.open(fname, 'rb')) as spf:
     beats = np.where(diff >= thresold)[0] / diff.size * duration * 1000
     frame_drop = 0
 
-    pygame.mixer.init()
-    pygame.mixer.music.load('./filtered.wav')
-    pygame.mixer.music.play()
-
-    pygame.init()
-    first = True
-    onsets = [frame_drop + t for t in beats]
-    while True:
-        ticks = pygame.time.get_ticks()
-        if len(onsets) > 0 and ticks >= onsets[0]:
-            print('beat (time: %f)' % ticks)
-            del onsets[0]
-            beats = np.delete(beats, 0)
+    print(dumps(beats.tolist()))
