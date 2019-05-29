@@ -11,7 +11,7 @@ from sys import argv
 fname = argv[1]
 outname = 'filtered.wav'
 cutoff_freq = 400.0
-thresold = 1500
+thresold = 2700
 
 
 def running_mean(x, window_size):
