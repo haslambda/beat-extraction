@@ -5,7 +5,6 @@ import wave
 import math
 import contextlib
 import numpy as np
-from json import dumps
 from sys import argv
 
 fname = argv[1]
@@ -79,7 +78,9 @@ with contextlib.closing(wave.open(fname, 'rb')) as spf:
 
     right_shifted = np.delete(np.insert(processed, 0, 0), -1)
     diff = right_shifted - processed
-    beats = np.where(diff >= thresold)[0] / diff.size * duration
+    beats = np.where(diff >= thresold)[0] / diff.size * duration * 1000
     frame_drop = 0
 
-    print(dumps(beats.tolist()))
+    for index, beat in enumerate(beats):
+        print(int(beat))
+        print(-1 if index == beats.size - 1 else 0)
